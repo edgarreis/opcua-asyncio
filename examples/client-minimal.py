@@ -2,7 +2,7 @@ import asyncio
 
 from asyncua import Client
 
-url = "opc.tcp://localhost:4840/freeopcua/server/"
+url = "opc.tcp://localhost:4848/freeopcua/server/"
 namespace = "http://examples.freeopcua.github.io"
 
 
@@ -16,12 +16,12 @@ async def main():
 
         # Get the variable node for read / write
         var = await client.nodes.root.get_child(
-            f"0:Objects/{nsidx}:MyObject/{nsidx}:MyVariable"
+            f"0:Objects/{nsidx}:MyObject2/{nsidx}:pressao"
         )
         value = await var.read_value()
         print(f"Value of MyVariable ({var}): {value}")
 
-        new_value = value - 50
+        new_value = value + 50
         print(f"Setting value of MyVariable to {new_value} ...")
         await var.write_value(new_value)
 
